@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div id="login-screen">
+    <h2>Owner</h2>
+
+    <input type="password"
+           id="admin-password"
+           placeholder="Access code">
+
+<button class="btn btn-primary" onclick="loginAdmin()">Login</button>
+</div>
+
+<div id="admin-content" style="display:none;">
+
+    <div class="admin-container">
+             <header>
+            <h1>Espace Administration</h1>
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">back to home</button>
+        </header>
+
+        <div class="grid">
+            <!-- 1. PARAMÈTRES DU Owner -->
+            <section class="card">
+                <h2>1.Opening  & hours</h2>
+                <p class="subtitle">Can be modified at any time</p>
+                
+                <div class="form-group">
+                    <label for="salon-days">Opening days</label>
+                    <input type="text" id="salon-days" value="Lundi au Samedi">
+                </div>
+                <div class="form-group">
+                    <label for="salon-hours">Opening time
+             </label>
+                    <input type="text" id="salon-hours" value="09:00 - 19:00">
+                </div>
+                <div class="form-group">
+                    <label for="salon-break">Lunch break days & hours</label>
+                    <input type="text" id="salon-break" value="Dimanche (Fermé), Pause midi : 12:30 - 13:30">
+                </div>
+                <button class="btn btn-primary" onclick="alert('Schedule configuration successfully saved to the server
+')">Save schedule</button>
+            </section>
+
+            <!-- 2. GESTION DES SERVICES -->
+            <section class="card">
+                <h2>2. Available services</h2>
+                <div class="form-group input-spacing">
+                    <input type="text" id="service-name" placeholder="Nom (ex: Medium dog bath & grooming)">
+                </div>
+                <div class="form-group">
+                    <label for="service-duration"> Service duration (minutes)</label>
+                    <!-- CORRECTION : Saisie manuelle de la durée -->
+                    <input type="number" id="service-duration" placeholder="enter duration (ex: 35)" min="1">
+                </div>
+                
+                <button class="btn btn-primary" onclick="addService()">Add service</button>
+
+                <h3>Service list</h3>
+                <div id="services-list" class="list-container"></div>
+            </section>
+            
+            
+           <!-- 2.5 GESTION DES Employees -->
+<section class="card">
+    <h2>2.5 Employees</h2>
+    <p class="subtitle">Add versatile or specialized employees</p>
+
+    <div class="form-group">
+        <input type="text" id="employee-name" placeholder="Employee name">
+    </div>
+
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="employee-polyvalent">
+            versatile employee ( can perform all services)
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label> Mastered service:</label>
+        <div id="employee-services-list"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="addEmployee()">
+        add employee
+    </button>
+
+    <h3>employee list</h3>
+    <div id="employees-list" class="list-container"></div>
+</section>
+
+            <!-- 3. AJOUT CLIENTS DIRECTS -->
+            <section class="card full-width">
+                <h2>3. Add a walk-in customer </h2>
+                
+                <div class="tab-buttons">
+                    <button class="tab-btn active" id="tab-auto" onclick="switchClientMode('auto')">Automatic add</button>
+                    <button class="tab-btn" id="tab-manual" onclick="switchClientMode('manual')">Manual add</button>
+                </div>
+
+                <!-- Formulaire Commun / Choix du service -->
+                <div class="form-group">
+                    <label for="client-service">Select service</label>
+                    <select id="client-service" onchange="updateDurationHint()">
+                        <!-- Rempli dynamiquement par le JavaScript -->
+                    </select>
+                    <p class="hint-text">Estimated duration : <span id="duration-hint">0</span> minutes</p>
+                </div>
+
+                <!-- Mode Automatique -->
+                <div id="form-auto">
+                    <p class="info-auto">⚡ The customer will be automatically placed in the next available time slot.</p>
+                </div>
+
+                <!-- Mode Manuel -->
+                <div id="form-manual" class="hidden">
+                    <div class="form-group">
+                        <label for="client-date">Appointment date and day</label>
+                        <input type="date" id="client-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-time">Exact time</label>
+                        <input type="time" id="client-time">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-full" onclick="addClient()">Save customer</button>
+
+
+                <div id="clients-list" class="list-container"></div>
+                
+                <h3>Schedule by service</h3>
+<div id="service-schedules-container"></div>
+            </section>
+        </div>
+    </div>
+    </div>
+
+    <!-- Lien vers le fichier JavaScript dédié à l'administration configuré en Module -->
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
