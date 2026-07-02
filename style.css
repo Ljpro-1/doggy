@@ -1,0 +1,150 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+/* Slider plein écran */
+.gallery-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    scroll-behavior: smooth;
+}
+
+.gallery {
+    display: flex;
+    height: 100%;
+}
+
+.gallery img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    transition: transform 0.5s, filter 0.5s;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+}
+
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Overlay pour texte et boutons */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    pointer-events: none; /* permet de scroller la galerie */
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: auto;
+}
+
+.main-content {
+    text-align: center;
+    color: #ffffff;
+    pointer-events: auto;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.welcome-text {
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: beige;
+    margin-bottom: 10px;
+}
+
+.brand-title {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer avec bouton Entrer */
+.footer {
+    display: flex;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+/* Boutons */
+.btn {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Entrer */
+.btn-primary {
+    background-color: #4a3b32;
+    color: white;
+    padding: 16px 48px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #3a2c26;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Admin */
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .brand-title { font-size: 2.5rem; }
+    .welcome-text { font-size: 1.5rem; }
+    .btn-primary { padding: 14px 36px; font-size: 1rem; }
+}
